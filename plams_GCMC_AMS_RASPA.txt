@@ -1,0 +1,63 @@
+from ase.io import read, write
+
+#==============Set-Input=====================
+s = Settings()
+
+#==============Simulation-parameters=========
+s.input.simulationtype ='MonteCarlo'
+s.input.numberofcycles = 25000
+s.input.printevery = 1000
+s.input.forcefield = 'ExampleMOFsForceField'
+s.input.restartfile = 'no'
+s.input.usechargesfromciffile = 'yes'
+#===============Execution-parameterrs========
+s.input.framework._h = 0
+s.input.framework.frameworkname = 'NiNiAAcharge'
+s.input.framework.unitcells = '2 2 3'
+s.input.heliumvoidfraction = 0.345
+s.input.externaltemperature = 298.15
+s.input.externalpressure = '1e3 1e4 2e4'
+#s.input.cutoff = 24.0
+
+s.input.computenumberofmoleculeshistogram = 'yes'
+s.input.writenumberofmoleculeshistogramevery = 5000
+s.input.numberofmoleculeshistogramsize = 1100
+#s.input.numberofmoleculesrange = 80
+
+s.input.computeenergyhistogram = 'yes'
+s.input.writeenergyhistogramevery = 5000
+s.input.energyhistogramsize = 400
+s.input.energyhistogramlowerlimit = -110000
+s.input.energyhistogramupperlimit = -20000
+
+s.input.Component['0'] = Settings()
+s.input.Component['0'].moleculename = 'NH3'
+s.input.Component['0'].moleculedefinition = 'ExampleDefinitions'
+s.input.Component['0'].translationprobability = 0.5
+s.input.Component['0'].reinsertionprobability =  0.5
+s.input.Component['0'].swapprobability = 1.0
+s.input.Component['0'].rotationprobability = 0.5
+#s.input.Component['0'].idealgasrosenbluthweight = 1.00132
+s.input.Component['0'].createnumberofmolecules = 0
+
+#================Job-run=====================
+job = RaspaJob(name='test', settings=s)
+#jobrun = job.run()
+
+#==============set queueing system===========
+gr = GridRunner(parallel=True, maxjobs=1, grid='slurm')
+gr.settings.special.export = '--export='
+#jobrun = job.run(jobrunner=gr, queue='nodes', node=2, J='something', O='')
+jobrun = job.run(jobrunner=gr, walltime='20-48:00:00', queue='nodes', export='value')
+
+#================Results=====================
+#isotherm=jobrun.get_isotherm(output_folder='Output/System_0/', get_std=True, get_unit=True, search_x='Partial pressure', search_y='Average loading excess')
+isotherm=jobrun.get_isotherm(output_folder='Output/System_0/', search_x='Partial pressure', search_y='Average loading excess', get_unit=True)
+#isotherm=jobrun.get_isotherm()
+print(isotherm)
+
+#================write results in newfile===
+newfile = open('Isotherm.out','w+')
+for values in isotherm:
+    values = str(values)
+    newfile.write((values)+ '\n')
