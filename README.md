@@ -1,8 +1,7 @@
 - 👋 Hi, I’m @HasnainMSajid
-- 👀 I’m interested in python coding
-- 🌱 I’m currently learning PhD Chemistry
-- 💞️ I’m looking to collaborate on python Chemistry Scripting
-- 📫 How to reach me hasnainmsajid@yahoo.com
+- 👀 I’m interested in Python coding
+- 🌱 I’m currently PDF at uOttawa
+- 💞️- 📫 How to reach me hasnainmsajid@yahoo.com
 
 <!---
 HasnainMSajid/HasnainMSajid is a ✨ special ✨ repository because its `README.md` (this file) appears on your GitHub profile.
