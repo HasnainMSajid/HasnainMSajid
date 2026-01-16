@@ -1,6 +1,6 @@
 - 👋 Hi, I’m Dr @HasnainMSajid (PhD)
 - 👀 PhD in Computational Materials and Forensic Sciences
-- 🌱 I’m currently a PDF at Carleton University
+- 🌱 I’m currently a PDF at Carleton University, Canada
 - 💞️- 📫 How to reach me hasnainmsajid@gmail.com
 
 <!---
